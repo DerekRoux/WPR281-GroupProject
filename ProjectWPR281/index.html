@@ -4,12 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bug Tracker - Data Foundation</title>
+  <!-- THIS SCRIPT REFERENCE LINKS TO BOOTSTRAP CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+  <!-- THIS SCRIPT REFERENCE LINKS TO BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
   <h1>Bug Tracker Data Test</h1>
   <div id="output"></div>
 
-  <table border="1" id="bugTable">
+
+  <!-- CREATING A NEW ISSUE BUTTON AND MODAL -->
+  <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCreateIssue">CREATE ISSUE</button>
+
+  <div class="modal fade" id="modalCreateIssue" tabindex="-1">
+    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Issue</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Summary</label>
+          <input id="createIssue_Summary" type="text" class="form-control">
+
+          <label class="form-label">Description</label>
+          <input id="createIssue_Description" type="text" class="form-control">
+
+          <label class="form-label">Priority</label>
+          <input id="createIssue_Priority" type="text" class="form-control">
+
+          <label class="form-label">Status</label>
+          <input id="createIssue_Status" type="text" class="form-control">
+
+          <label class="form-label">Project</label>
+          <input id="createIssue_Project" type="text" class="form-control">
+
+          <label class="form-label">Date Identified</label>
+          <input id="createIssue_DateIdentified" type="text" class="form-control">
+
+          <label class="form-label">Resolution Date</label>
+          <input id="createIssue_DateResolution" type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="createNewIssue" type="button" class="btn btn-primary">Create Issue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <table border="1" id="bugTable" class="table">
     <thead>
       <tr>
         <th>ID</th>
@@ -22,6 +70,100 @@
     <tbody id="bugTableBody">
       </tbody>
   </table>
+
+
+
+  <!-- THIS IS THE POPUP FOR VIEWING AN ISSUE -->
+  <div class="modal fade" id="modalViewIssue" tabindex="-1">
+    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">View Issue</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label"><b>Summary</b></label>
+          <label id="viewIssueSummary" class="form-label">SUMMARY GOES HERE</label> <br>
+
+          <label class="form-label"><b>Description</b></label>
+          <label id="viewIssueDescription" class="form-label">DESCRIPTION GOES HERE</label> <br>
+
+          <label class="form-label"><b>Project</b></label>
+          <label id="viewIssueProject" class="form-label">PROJECT GOES HERE</label> <br>
+          
+          <label class="form-label"><b>Assigned To</b></label>
+          <label id="viewIssueAssigned" class="form-label">ASSIGNED GOES HERE</label> <br>
+
+          <label class="form-label"><b>Priority</b></label>
+          <label id="viewIssuePriority" class="form-label">PRIORITY GOES HERE</label> <br>
+
+          <label class="form-label"><b>Status</b></label>
+          <label id="viewIssueStatus" class="form-label">STATUS GOES HERE</label> <br>
+
+          <label class="form-label"><b>Date Identified</b></label>
+          <label id="viewIssueDateIdentified" class="form-label">IDENTIFIED GOES HERE</label> <br>
+
+          <label class="form-label"><b>Target Resolution Date</b></label>
+          <label id="viewIssueDateResolved" class="form-label">RESOLUTION GOES HERE</label> <br>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THIS IS THE POPUP FOR EDITING AN ISSUE -->
+  <div class="modal fade" id="modalEditIssue" tabindex="-1">
+    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Issue</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Summary</label>
+          <input id="editSummary" type="text" class="form-control">
+          <label class="form-label">Description</label>
+          <input id="editDescription" type="text" class="form-control">
+          <label class="form-label">Priority</label>
+          <input id="editPriority" type="text" class="form-control">
+          <label class="form-label">Status</label>
+          <input id="editStatus" type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Update Issue</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THIS IS THE POPUP FOR ASSIGNING AN ISSUE -->
+  <div class="modal fade" id="modalAssignIssue" tabindex="-1">
+    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Assign Issue</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Project</label>
+          <input id="assignProject" type="text" class="form-control">
+          <label class="form-label">Date Of Resolution</label>
+          <input id="assignResolutionDate" type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Update Issue</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
   <script type="module">
     import { people, projects, issues } from './data.js';
@@ -49,11 +191,17 @@
         <td>${issue.summary}</td>
         <td>${issue.priority}</td>
         <td>${issue.status}</td>
-        <td><button disabled>Pending Logic</button></td>
+        <td>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalViewIssue">View</button>
+          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditIssue">Edit</button>
+          <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAssignIssue">Assign</button>
+        </td>
       `;
 
       tableBody.appendChild(row);
     });
+
+    
   </script>
 </body>
 </html>
