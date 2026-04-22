@@ -4,28 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bug Tracker - Data Foundation</title>
-  <!-- THIS SCRIPT REFERENCE LINKS TO BOOTSTRAP CSS -->
+  <!-- This is to link the bootstrap css  -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  
 </head>
+
+
 <body>
-  <!-- THIS SCRIPT REFERENCE LINKS TO BOOTSTRAP JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <!-- This is the navbar found at the top of the page -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Bug Tracker</a>
+    <div class="navbar-nav">
+      <a class="nav-link" href="/ProjectWPR281/index.html">Issues</a>
+      <a class="nav-link" href="/ProjectWPR281/peopleAndProjects.html">People & Projects</a>
+    </div>
+  </div>
+</nav>
 
-  <h1>Bug Tracker Data Test</h1>
-  <div id="output"></div>
+  <!-- Here we create the new issue button -->
+  <div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Issues</h2>
+    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCreateIssue">CREATE ISSUE</button>
+  </div>
 
-
-  <!-- CREATING A NEW ISSUE BUTTON AND MODAL -->
-  <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCreateIssue">CREATE ISSUE</button>
-
+  <!-- Here we start the creation of the create issue modal -->
   <div class="modal fade" id="modalCreateIssue" tabindex="-1">
-    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
+    <!-- Inside of this modal dialog div is where the modal content needs to go -->
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Create Issue</h5>
         </div>
+        
         <div class="modal-body">
+          <!-- Here we create the inputs for the modal -->
           <label class="form-label">Summary</label>
           <input id="createIssue_Summary" type="text" class="form-control">
 
@@ -33,19 +47,33 @@
           <input id="createIssue_Description" type="text" class="form-control">
 
           <label class="form-label">Priority</label>
-          <input id="createIssue_Priority" type="text" class="form-control">
-
-          <label class="form-label">Status</label>
-          <input id="createIssue_Status" type="text" class="form-control">
-
-          <label class="form-label">Project</label>
-          <input id="createIssue_Project" type="text" class="form-control">
+          <select id="createIssue_Priority" class="form-control">
+              <option value="">-- Select Priority --</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+          </select>
 
           <label class="form-label">Date Identified</label>
-          <input id="createIssue_DateIdentified" type="text" class="form-control">
+          <input id="createIssue_DateIdentified" type="date" class="form-control">
 
-          <label class="form-label">Resolution Date</label>
-          <input id="createIssue_DateResolution" type="text" class="form-control">
+          <label class="form-label">Target Resolution Date</label>
+          <input id="createIssue_TargetResolutionDate" type="date" class="form-control">
+
+          <label class="form-label">Project</label>
+          <select id="createIssue_Project" class="form-control">
+              <option value="">-- Select Project --</option>
+          </select>
+
+          <label class="form-label">Identified By</label>
+          <select id="createIssue_IdentifiedBy" class="form-control">
+              <option value="">-- Select Person --</option>
+          </select>
+
+          <label class="form-label">Assigned To</label>
+          <select id="createIssue_AssignedTo" class="form-control">
+             <option value="">-- Select Person --</option>
+         </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -56,8 +84,8 @@
   </div>
 
 
-
-  <table border="1" id="bugTable" class="table">
+<!-- This is the layout of the table for all the listed bugs/issues/tickets -->
+  <table id="bugTable" class="table">
     <thead>
       <tr>
         <th>ID</th>
@@ -71,17 +99,18 @@
       </tbody>
   </table>
 
+</div>
 
 
-  <!-- THIS IS THE POPUP FOR VIEWING AN ISSUE -->
+  <!-- Thisi s the modal for viewing an existing issue -->
   <div class="modal fade" id="modalViewIssue" tabindex="-1">
-    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">View Issue</h5>
         </div>
         <div class="modal-body">
+          <!-- This is how the data displays when clicking on view -->
           <label class="form-label"><b>Summary</b></label>
           <label id="viewIssueSummary" class="form-label">SUMMARY GOES HERE</label> <br>
 
@@ -114,15 +143,15 @@
     </div>
   </div>
 
-  <!-- THIS IS THE POPUP FOR EDITING AN ISSUE -->
+  <!-- This modal is for editing a existing modal -->
   <div class="modal fade" id="modalEditIssue" tabindex="-1">
-    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Issue</h5>
         </div>
         <div class="modal-body">
+          <!-- Here we have the inputs to change the modal -->
           <label class="form-label">Summary</label>
           <input id="editSummary" type="text" class="form-control">
           <label class="form-label">Description</label>
@@ -134,74 +163,38 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Update Issue</button>
+          <button id="confirmEditIssue" type="button" class="btn btn-primary">Update Issue</button>
       </div>
       </div>
     </div>
   </div>
 
-  <!-- THIS IS THE POPUP FOR ASSIGNING AN ISSUE -->
-  <div class="modal fade" id="modalAssignIssue" tabindex="-1">
-    <!-- Inside of this modal dialog div is where the modal content needs to go. The white box -->
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Assign Issue</h5>
-        </div>
-        <div class="modal-body">
-          <label class="form-label">Project</label>
-          <input id="assignProject" type="text" class="form-control">
-          <label class="form-label">Date Of Resolution</label>
-          <input id="assignResolutionDate" type="text" class="form-control">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Update Issue</button>
+  <!-- This is the modal for assignnig a person to an existing issue/ticket/bug -->
+<div class="modal fade" id="modalAssignIssue" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Issue</h5>
       </div>
+      <div class="modal-body">
+        <label class="form-label">Assign To</label>
+        <select id="assignPersonSelect" class="form-control">
+          <option value="">-- Select a Person --</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="confirmAssignIssue" type="button" class="btn btn-primary">Assign Issue</button>
       </div>
     </div>
   </div>
+</div>
 
 
-
-
-  <script type="module">
-    import { people, projects, issues } from './data.js';
-    
-    let outputDiv = document.getElementById('output');
-    outputDiv.innerHTML = "<h2>Data Loaded Successfully!</h2>";
-
-
-    localStorage.setItem('people', JSON.stringify(people));
-    localStorage.setItem('projects', JSON.stringify(projects));
-    localStorage.setItem('issues', JSON.stringify(issues));
-
-
-    console.log("Data & QA: Baseline data saved to LocalStorage.");
-
-
-    let tableBody = document.getElementById('bugTableBody');
-    tableBody.innerHTML = '';
-
-    issues.forEach(issue => {
-      let row = document.createElement('tr');
-
-      row.innerHTML = `
-        <td>${issue.id}</td>
-        <td>${issue.summary}</td>
-        <td>${issue.priority}</td>
-        <td>${issue.status}</td>
-        <td>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalViewIssue">View</button>
-          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditIssue">Edit</button>
-          <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAssignIssue">Assign</button>
-        </td>
-      `;
-
-      tableBody.appendChild(row);
-    });
-
-    
-  </script>
+  <!-- The script files are at the bottom of the page because for some reason when we move it to the head...nothing works ;D -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="/JS/storage.js"></script>
+  <script src="/JS/issues.js"></script>
+  <script src="/JS/issuesFunctionality.js"></script>
 </body>
 </html>

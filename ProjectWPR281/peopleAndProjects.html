@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Tracker - People & Projects</title>
+  <!-- This link is for linking bootstrap css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+  <!-- This is the navbar, looks and acts the same as index.html -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Bug Tracker</a>
+      <div class="navbar-nav">
+        <a class="nav-link" href="/ProjectWPR281/index.html">Issues</a>
+        <a class="nav-link active" href="/ProjectWPR281/peopleAndProjects.html">People & Projects</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- This section is for People -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>People</h2>
+      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCreatePerson">ADD PERSON</button>
+    </div>
+
+    <table class="table" id="peopleTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody id="peopleTableBody"></tbody>
+    </table>
+
+    <hr>
+
+    <!-- This section is for projects -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Projects</h2>
+      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCreateProject">ADD PROJECT</button>
+    </div>
+
+    <table class="table" id="projectsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="projectsTableBody"></tbody>
+    </table>
+
+  </div>
+
+  <!-- This modal is for creating a new person -->
+  <div class="modal fade" id="modalCreatePerson" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Person</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Name</label>
+          <input id="createPerson_Name" type="text" class="form-control">
+          <label class="form-label">Surname</label>
+          <input id="createPerson_Surname" type="text" class="form-control">
+          <label class="form-label">Email</label>
+          <input id="createPerson_Email" type="email" class="form-control">
+          <label class="form-label">Username</label>
+          <input id="createPerson_Username" type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="confirmCreatePerson" type="button" class="btn btn-primary">Add Person</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- This modal is for creating a new project -->
+  <div class="modal fade" id="modalCreateProject" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Project</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Project Name</label>
+          <input id="createProject_Name" type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="confirmCreateProject" type="button" class="btn btn-primary">Add Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Like before, if we place the script files at the top, everything breaks -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="/JS/storage.js"></script>
+  <script src="/JS/peopleAndProjects.js"></script>
+  <script src="/JS/peopleFunctionality.js"></script>
+</body>
+</html>
